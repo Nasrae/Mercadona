@@ -8,21 +8,14 @@ from django.contrib.auth import authenticate, login, logout
 
 def mercadona_list(request):
     product = produit.objects.all()
-    context = {"product": product}
-    return render(request, "mercadona/list.html", context)
-
-def mercadona_categorie(request):
-    cat = categorie.objects.all()
-    context = {"cat": cat}
-    return render(request, "mercadona/base.html", context)
-
-def mercadona_promotion(request):
     promo = promotion.objects.all()
-    context = {"promo": promo}
-    return render(request, "mercadona/promotion.html", context)
+    cat = categorie.objects.all()
+    context = {"product": product, "promo": promo, "cat": cat}
+    return render(request, "mercadona/list.html", context)
 
 @login_required
 def produit_new(request):
+    cat = categorie.objects.all()
     if request.method == "POST":
         form = produitForm(request.POST,request.FILES)
         if form.is_valid():
@@ -31,7 +24,7 @@ def produit_new(request):
             return redirect('produit_new')
     else:
         form = produitForm()
-    context = {'form':form}
+    context = {'form':form, "cat": cat}
     return render(request,"mercadona/produit_new.html",context)
 
 def login_view(request):
@@ -56,17 +49,17 @@ def delete_product(request, product_id):
     return redirect("/")
 
 @login_required
-def promotions(request, product_id):
-    promo_ID = produit.objects.get(pk=product_id)
+def promo_new(request):
     if request.method == "POST":
-        form = promotionForm(request.POST, request.FILES)
+        form = promotionForm(request.POST)
+
         if form.is_valid():
             promotion = form.save(commit=False)
             promotion.save()
             return redirect('/')
     else:
         form = promotionForm()
-    context = {'promo_ID':promo_ID, 'form':form}
-    return render(request, "mercadona/promotion.html", context)
+    context = {'form':form}
+    return render(request, "mercadona/promo_new.html", context)
 
 

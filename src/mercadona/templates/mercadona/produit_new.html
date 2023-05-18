@@ -50,7 +50,7 @@
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                    {% if cat %}
                     {% for categorie in cat %}
-                    <li><a class="dropdown-item" href="">{{ categorie.categorie }}</a></li>
+                    <li><a class="dropdown-item" >{{ categorie.label }}</a></li>
                     {% endfor %}
                   {% endif %}
               </ul>

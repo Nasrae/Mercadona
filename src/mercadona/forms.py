@@ -10,7 +10,7 @@ class produitForm(forms.ModelForm):
 class promotionForm(forms.ModelForm):
     class Meta:
         model = promotion
-        fields = ('promo_ID', 'promotion', 'durer')
+        fields = ('promotion', 'durer')
 
 class categorieForm(forms.ModelForm):
     class Meta:

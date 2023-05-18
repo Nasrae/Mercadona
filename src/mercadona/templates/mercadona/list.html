@@ -31,19 +31,19 @@
                                             <!-- Product price-->
                                             {% if promo %}
                                                 {% for promotion in promo %}
-                                                    <div class="text-decoration-line-through">{{ produit.prix }}</div>
-                                                    <div class="fw-bold text-danger">{{ promotion.promotion }}</div>
+                                                    <div class="text-decoration-line-through">{{ produit.prix }} €</div>
+                                                    <div class="fw-bold text-danger">{{ promotion.promotion }} %</div>
                                                     <div>{{ promotion.durer }}</div>
                                                 {% endfor %}
                                             {% else %}
-                                                <div>{{ produit.prix }}</div>
+                                                <div>{{ produit.prix }} €</div>
                                             {% endif %}
                                         </div>
                                     </div>
                                     {% if user.is_authenticated %}
                                         <!-- Product actions-->
                                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                            <a href="{% url 'promotion' produit.id %}" class="btn btn-outline-secondary">Promotion</a>
+                                            <a href="{% url 'promo_new' %}" class="btn btn-outline-secondary">Promotion</a>
                                             <a href="{% url 'delete' produit.id %}" class="btn btn-outline-danger">Supprimer</a>
                                         </div>
                                     {% endif %}
