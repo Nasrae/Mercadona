@@ -1,0 +1,68 @@
+{% extends 'mercadona/base.html' %}
+{% load static %}
+{% block content %}
+        <script src="{% static 'mercadona/js/test.js' %} "></script>
+
+<div>
+    <!-- Main component for a primary marketing message or call to action -->
+      <div class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <p class="display-6 fw-bolder">Ajoutez votre produit :</p>
+                </div>
+            </div>
+        </div>
+
+  </div> <!-- /container -->
+
+  <div class="container-fluid">
+    <div class="justify-content-center">
+      <div class="col mb-2">
+        <h2 class="text-center">Remplissez tout les champs et valider.</h2>
+      <form method="POST" class="post-form" enctype="multipart/form-data">{% csrf_token %}
+          {{ form.non_field_errors }}
+          <div class="form-group">
+          <label for="{{ form.label.id_for_label }}">Nom</label>
+          <input type="text" class="form-control" id="{{ form.label.id_for_label }}" name="{{ form.label.html_name }}" placeholder="outils, lot de piles,...">
+          {{ form.label.errors }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.description.id_for_label }}">Description</label>
+          <input type="text" class="form-control" id="{{ form.description.id_for_label }}" name="{{ form.description.html_name }}" placeholder="Décrivez le produit">
+          {{ form.description.errors }}
+        </div>
+        <div class="form-group">
+          <label for="{{ form.prix.id_for_label }}">Prix</label>
+          <input type="text" class="form-control" id="{{ form.prix.id_for_label }}" name="{{ form.prix.html_name }}" placeholder="19.99€">
+          {{ form.prix.errors }}
+        </div>
+          <div class="form-group">
+          <label for="{{ form.image.id_for_label }}">Image</label>
+          <input type="file" id="{{ form.image.id_for_label }}" name="{{ form.image.html_name }}">
+          <p class="help-block">ajoutez une image d'une taille maximum de 350x400./p>
+          {{ form.image.errors }}
+        </div>
+        <div class="form-group">
+          <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                Catégorie
+            </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" href="">Maison et textiles</a></li>
+                <li><a class="dropdown-item" href="#!">Entretien et de nettoyage</a></li>
+                <li><a class="dropdown-item" href="#!">Hygiène et de beauté</a></li>
+                <li><a class="dropdown-item" href="#!">Fruit et légumes</a></li>
+                <li><a class="dropdown-item" href="#!">Boucherie</a></li>
+                <li><a class="dropdown-item" href="#!">Boulangerie</a></li>
+                <li><a class="dropdown-item" href="#!">Poissonerie</a></li>
+                <li><a class="dropdown-item" href="#!">Quincaillerie</a></li>
+                <li><a class="dropdown-item" href="#!">Surgelés</a></li>
+              </ul>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-default">Valider</button>
+      </form>
+    </div>
+    </div>
+  </div>
+{% endblock %}

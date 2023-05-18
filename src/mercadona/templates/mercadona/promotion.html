@@ -1,0 +1,46 @@
+{% extends 'mercadona/base.html' %}
+{% load static %}
+{% block content %}
+<div>
+    <!-- Main component for a primary marketing message or call to action -->
+      <div class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <p class="display-6 fw-bolder">Ajoutez votre promotion :</p>
+                </div>
+            </div>
+        </div>
+
+  </div> <!-- /container -->
+
+  <div class="container-fluid">
+    <div class="justify-content-center">
+      <div class="col mb-2">
+        <h2 class="text-center">Remplissez tout les champs et valider pour ajouter la promotion.</h2>
+            <form method="POST" class="post-form" enctype="multipart/form-data">{% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="form-group">
+                    {% if produit %}
+                        {% for product in produit %}
+                             <label>Prix : {{ produit.prix }}</label>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+             <form method="POST" class="post-form" enctype="multipart/form-data">{% csrf_token %}
+                {{ form.non_field_errors }}
+                <div class="form-group">
+                  <label for="{{ form.promotion.id_for_label }}">Promotion</label>
+                  <input type="text" class="form-control" id="{{ form.promotion.id_for_label }}" name="{{ form.promotion.html_name }}" placeholder="25%, 30%,...">
+                  {{ form.promotion.errors }}
+                </div>
+                <div class="form-group">
+                  <label for="{{ form.durer.id_for_label }}">durée de la promotion</label>
+                  <input type="text" class="form-control" id="{{ form.durer.id_for_label }}" name="{{ form.durer.html_name }}" placeholder="24:00:00 pour 24 heures">
+                  {{ form.durer.errors }}
+                </div>
+                <button type="submit" class="btn btn-secondary">Valider</button>
+             </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}
