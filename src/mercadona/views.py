@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from .models import produit, promotion, categorie
 from django.shortcuts import redirect, render
 from .forms import produitForm, promotionForm, categorieForm
@@ -9,14 +8,18 @@ from django.contrib.auth import authenticate, login, logout
 
 def mercadona_list(request):
     product = produit.objects.all()
-    promo = promotion.objects.all()
-    context = {"promo": promo, "product": product}
+    context = {"product": product}
     return render(request, "mercadona/list.html", context)
 
 def mercadona_categorie(request):
-    cat = categorie().objects.all()
+    cat = categorie.objects.all()
     context = {"cat": cat}
     return render(request, "mercadona/base.html", context)
+
+def mercadona_promotion(request):
+    promo = promotion.objects.all()
+    context = {"promo": promo}
+    return render(request, "mercadona/promotion.html", context)
 
 @login_required
 def produit_new(request):
@@ -54,20 +57,16 @@ def delete_product(request, product_id):
 
 @login_required
 def promotions(request, product_id):
-    product = produit.objects.get(pk=product_id)
+    promo_ID = produit.objects.get(pk=product_id)
     if request.method == "POST":
-        form = promotionForm(request.POST,request.FILES)
+        form = promotionForm(request.POST, request.FILES)
         if form.is_valid():
             promotion = form.save(commit=False)
             promotion.save()
             return redirect('/')
     else:
         form = promotionForm()
-    context = {'product':product, 'form':form}
+    context = {'promo_ID':promo_ID, 'form':form}
     return render(request, "mercadona/promotion.html", context)
 
 
-#stand-by
-def categorie(request, cat_id):
-    categorie = categorie.objects.get(pk=cat_id)
-    return

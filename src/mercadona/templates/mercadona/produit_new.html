@@ -48,15 +48,11 @@
                 Catégorie
             </a>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <li><a class="dropdown-item" href="">Maison et textiles</a></li>
-                <li><a class="dropdown-item" href="#!">Entretien et de nettoyage</a></li>
-                <li><a class="dropdown-item" href="#!">Hygiène et de beauté</a></li>
-                <li><a class="dropdown-item" href="#!">Fruit et légumes</a></li>
-                <li><a class="dropdown-item" href="#!">Boucherie</a></li>
-                <li><a class="dropdown-item" href="#!">Boulangerie</a></li>
-                <li><a class="dropdown-item" href="#!">Poissonerie</a></li>
-                <li><a class="dropdown-item" href="#!">Quincaillerie</a></li>
-                <li><a class="dropdown-item" href="#!">Surgelés</a></li>
+                   {% if cat %}
+                    {% for categorie in cat %}
+                    <li><a class="dropdown-item" href="">{{ categorie.categorie }}</a></li>
+                    {% endfor %}
+                  {% endif %}
               </ul>
           </div>
         </div>
